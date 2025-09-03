@@ -1,4 +1,8 @@
 JUNK
-BUILD
 .vs
 cache
+*.exe
+*.dll
+*.pdb
+*.mp4
+*.mkv
