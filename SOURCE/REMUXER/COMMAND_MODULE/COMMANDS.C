@@ -103,7 +103,7 @@ create_com(debug,
 static
 create_com(back,
     "Goes back to main screen", {
-    set_screen(&remux->ui, SCR_MAIN);
+    set_screen(&remux->ui, SCREEN_MAIN);
 });
 
 static
@@ -114,7 +114,7 @@ create_com(exit,
 
 static
 create_com(help, "what are we doin here man..", {
-    set_screen(&remux->ui, SCR_HELP);
+    set_screen(&remux->ui, SCREEN_HELP);
 });
 
 

@@ -44,7 +44,7 @@ void help_body_interface(remux_module *remux, section_t *section)
 
     section->height = get_section_height(cui, origin_y);
 
-    set_screen(cui, SCR_MAIN);
+    set_screen(cui, SCREEN_MAIN);
 }
 
 section_t help_body = {

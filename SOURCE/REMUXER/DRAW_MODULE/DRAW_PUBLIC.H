@@ -28,9 +28,9 @@ struct draw_module_s
 };
 
 typedef enum {
-    SCR_NO_ARG,
-    SCR_MAIN,
-    SCR_HELP
+    SCREEN_NO_ARGS,
+    SCREEN_MAIN,
+    SCREEN_HELP
 } screen_e;
 
 // implement in _REGISTER.C file

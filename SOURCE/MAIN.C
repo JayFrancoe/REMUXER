@@ -9,7 +9,7 @@ int main(int argc, char **argv)
     draw_init(&remux.ui);
     
     if (argc < 2) {
-        set_screen(&remux.ui, SCR_NO_ARG);
+        set_screen(&remux.ui, SCREEN_NO_ARGS);
     }
 
     draw_interface(&remux);
