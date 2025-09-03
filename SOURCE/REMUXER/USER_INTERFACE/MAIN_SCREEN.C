@@ -2,7 +2,7 @@
 #include "REMUXER/DRAW_MODULE/UI_BUILDER.H"
 
 static
-void _draw_nullable(con_ui *ui,const char *key, const char *string)
+void _draw_nullable(con_ui *ui, const char *key, const char *string)
 {
     cui_draw(ui, key);
 

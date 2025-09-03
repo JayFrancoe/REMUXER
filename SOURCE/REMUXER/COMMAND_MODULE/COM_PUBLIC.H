@@ -1,5 +1,7 @@
 #pragma once
 
+#define MAX_COMMANDS 32
+
 typedef struct command_module_s command_module;
 typedef void( *command_fn )(struct remux_module_s *, 
                             const char *);
@@ -17,7 +19,7 @@ typedef struct command_s command_t;
 
 struct command_module_s
 {
-    command_t *commands[32];
+    command_t *commands[MAX_COMMANDS];
     size_t com_count;
 
     char status_message[100];

@@ -46,6 +46,20 @@ First of all lets talk about how to open and build it.
 The code does not support linux as I do not know or use linux. If you do, feel free to write a pull request with support, tho undoubtedly there is probably already something like 
 avalible in a packagemanger.
 
+## Style guide:
+- Filenames should always be `UPPERCASE` and never use backward slash for `#includes`
+- All names should use `snake_case`. 
+- Lines should never exceed `80 chars`
+- Pointers align to the `right`.
+- Raw structs should have suffix `\_s`.
+- Structs that get used outside of other structs should be typedefed with suffix `\_t`.
+- Function pointers should have suffix `\_fn`.
+- `Single line if statements` should have the `opening bracket on the same line`.
+- `Const` and `static` modifier appear on row before return type.
+- 16bit integers should be typed `short int`.
+- `#define` macros should use `snake_case`, substitute should use `UPPERCASE`.
+
+
 # Understanding the source tree
 The source tree is made up of the console manipulation library I wrote, and the Remux module. The remux module has three key components that manage everything.
 
@@ -116,7 +130,8 @@ You can create your own header body and footer through the `section_t` struct. T
 
 `.draw_fn` which takes in a function pointer of `void(remux_module *, section_t *)` where section_t is itself.
 `.origin_y` lets you specify where on the screen to print. Positive numbers go from the top and down, while negative numbers go from the bottom and up. 
-You can also use `ORIGIN_CONTINUATION` (0x7FFF) to set the origin to wherever the cursor is after the previous section.
+You can also use `ORIGIN_CONTINUATION` (0x7FFF) to set the origin to wherever the cursor is after the previous section. 
+Any number larger than `cui->max_y` will trigger this behaviour.
 
 Inside your draw_fn you can use the `get_cui` macro to get a pointer to the con_ui instance. 
 Using the `get_section_origin()` function you can parse the origin_y to get a normalized y coordinate. Pass this into `cui_set_cursor` to set the cursor to the origin point.
@@ -127,6 +142,72 @@ At the end of your function, you can do `section->height = get_section_height()`
 
 Now register your draw function to the draw_fn function pointer, then provide your screen_t section with a pointer to your section_t object.
 
+ex:
+```c
+static 
+void no_arg_footer_interface(remux_module *remux, section_t *section)
+{
+    con_ui *cui = get_cui(remux);
+
+    short int origin_y = get_section_origin(cui, section->origin_y);
+
+    cui_set_cursor(cui, origin_y, 0);
+
+    cui_draw_horizontal(cui, '-');
+    cui_newline(cui);
+
+    cui_draw(cui, "Press any key to exit");
+
+    (void)_getch();
+
+    remux->exit_signal = 1;
+
+    section->height = get_section_height(cui, origin_y);
+}
+
+section_t no_arg_body = {
+    .draw_fn  = no_arg_body_interface,
+    .origin_y = ORIGIN_CONTINUATION
+};
+
+section_t no_arg_footer = {
+    .draw_fn = no_arg_footer_interface,
+    .origin_y = -2
+};
+
+screen_t no_arg_screen = {
+    .name   = "no_arg",
+    .header = &default_header,
+    .body   = &no_arg_body ,
+    .footer = &no_arg_footer
+};
+``` 
+
 Inside _REGISTER.C you can now add `extern screen_t screen_name;` and add your screen enum to the set_screen switch case. 
+
+ex:
+```c
+extern screen_t no_arg_screen;
+
+void set_screen(draw_module *draw, screen_e screen)
+{
+    screen_t *screen_ref = NULL;
+    switch (screen)
+    {
+        case SCR_HELP:
+            screen_ref = &help_screen;
+            break;
+        case SCR_MAIN:
+            screen_ref = &main_screen;
+            break;
+        case SCR_NO_ARG:
+            screen_ref = &no_arg_screen;
+        default:
+            break;
+    }
+    
+    draw->active_screen = screen_ref;
+}
+```
 
 Now just add a command or piece of logic to set_screen to your new screen and voilá, you now have a brand new screen.

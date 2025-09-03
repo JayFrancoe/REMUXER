@@ -120,20 +120,20 @@ create_com(help, "what are we doin here man..", {
 
 void register_commands(command_module *com)
 {
-    com->commands[com->com_count++] = &com_setname;
-    com->commands[com->com_count++] = &com_setproject;
-    com->commands[com->com_count++] = &com_setextension;
-    com->commands[com->com_count++] = &com_setseektime;
-    com->commands[com->com_count++] = &com_setduration;
-    com->commands[com->com_count++] = &com_setbitrate;
-    com->commands[com->com_count++] = &com_mute;
-    com->commands[com->com_count++] = &com_unmute;
-    com->commands[com->com_count++] = &com_play;
-    com->commands[com->com_count++] = &com_remux;
-    com->commands[com->com_count++] = &com_clearcache;
-    com->commands[com->com_count++] = &com_exit;
-    com->commands[com->com_count++] = &com_back;
-    com->commands[com->com_count++] = &com_help;
-    com->commands[com->com_count++] = &com_debug;
+    register_com(com, &com_setname);
+    register_com(com, &com_setproject);
+    register_com(com, &com_setextension);
+    register_com(com, &com_setseektime);
+    register_com(com, &com_setduration);
+    register_com(com, &com_setbitrate);
+    register_com(com, &com_mute);
+    register_com(com, &com_unmute);
+    register_com(com, &com_play);
+    register_com(com, &com_remux);
+    register_com(com, &com_clearcache);
+    register_com(com, &com_exit);
+    register_com(com, &com_back);
+    register_com(com, &com_help);
+    register_com(com, &com_debug);
 
 }

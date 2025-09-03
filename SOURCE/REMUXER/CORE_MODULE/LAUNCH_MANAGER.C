@@ -52,7 +52,7 @@ void buffer_init(buffer_t *Buf)
 static
 void buffer_append(buffer_t *Buf, char *format, ...)
 {
-    READ_VAR_ARGS(string, 200, format);
+    read_var_args(string, 200, format);
     char c = 0;
 
     for (int i = 0; c = string[i]; i++) {

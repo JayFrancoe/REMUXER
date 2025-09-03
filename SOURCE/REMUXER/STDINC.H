@@ -3,13 +3,13 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-#define PROCESS_ARGS_OUT_LEN(_Buffername, _size, _format, _len)\
+#define process_arg_out_len(_Buffername, _size, _format, _len)\
 char _Buffername##[_size] = {0}; int _len = 0;\
 { va_list args; va_start(args, _format);\
 _len = vsprintf(_Buffername, _format, args); va_end(args);}
 
-#define READ_VAR_ARGS(_Buffername, _size, _format)\
-PROCESS_ARGS_OUT_LEN(_Buffername, _size, _format, __UNUSED);
+#define read_var_args(_Buffername, _size, _format)\
+process_arg_out_len(_Buffername, _size, _format, __UNUSED);
 
 
 #define MAX_COMMANDS  16

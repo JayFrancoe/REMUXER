@@ -3,13 +3,13 @@
 #include "CUI_PRIVATE.H"
 #include "CUI_PUBLIC.H"
 
-#define PROCESS_ARGS_OUT_LEN(_Buffername, _size, _format, _len)\
+#define process_args_out_len(_Buffername, _size, _format, _len)\
 char _Buffername##[_size] = {0}; int _len = 0;\
 { va_list args; va_start(args, _format);\
 _len = vsprintf(_Buffername, _format, args); va_end(args);}
 
-#define READ_VAR_ARGS(_Buffername, _size, _format)\
-PROCESS_ARGS_OUT_LEN(_Buffername, _size, _format, __UNUSED);
+#define read_var_args(_Buffername, _size, _format)\
+process_args_out_len(_Buffername, _size, _format, __UNUSED);
 
 
 static
@@ -30,7 +30,7 @@ void cui_emit(con_ui *cui, const char c)
 
 void cui_draw_f(con_ui *cui, const char *str, ...)
 {
-    READ_VAR_ARGS(buffer, 800, str);
+    read_var_args(buffer, 800, str);
     cui_draw_ex(cui, 0, left, buffer);
 }
 
@@ -72,7 +72,7 @@ void cui_draw_ex(con_ui *cui,
 
 void cui_draw_ex_f(con_ui *cui, int offset, text_alignment alignment, const char *text, ...)
 {
-    READ_VAR_ARGS(buffer, 800, text);
+    read_var_args(buffer, 800, text);
 
     cui_draw_ex(cui, offset, alignment, buffer);
 }

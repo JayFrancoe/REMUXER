@@ -3,7 +3,7 @@
 
 short int get_section_origin(con_ui *cui, short int origin_y)
 {
-    if (origin_y == ORIGIN_CONTINUATION) {
+    if (origin_y > cui->max_y) {
         return cui->cur_y + 1;
     }
 
