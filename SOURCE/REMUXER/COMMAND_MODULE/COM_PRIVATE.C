@@ -1,0 +1,10 @@
+#include <memory.h>
+
+#include "COM_PRIVATE.H"
+
+size_t copy_arg(char *destination, char *arg, size_t size)
+{
+    memset(destination, '\0', size);
+
+    _memccpy(destination, arg, '\0', size);
+}

@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SOURCE\MAIN.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\CON_UI\CUI_INPUT.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\CON_UI\CUI_PUBLIC.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\CON_UI\DRAW_FUNCTIONS.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\CON_UI\CUI_PRIVATE.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\CON_UI\CURSOR_FUNCTIONS.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\REMUXER\CORE_MODULE\CORE_PUBLIC.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\REMUXER\COMMAND_MODULE\COM_PUBLIC.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\REMUXER\COMMAND_MODULE\COMMANDS.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\REMUXER\COMMAND_MODULE\COM_PRIVATE.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\REMUXER\CORE_MODULE\CORE_PRIVATE.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\REMUXER\CORE_MODULE\LAUNCH_MANAGER.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\REMUXER\DRAW_MODULE\DRAW_PUBLIC.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\REMUXER\USER_INTERFACE\DEFAULT_SECTIONS.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\REMUXER\DRAW_MODULE\UI_BUILDER.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\REMUXER\USER_INTERFACE\MAIN_SCREEN.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\REMUXER\USER_INTERFACE\_REGISTER.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\REMUXER\USER_INTERFACE\HELP_SCREEN.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\REMUXER\CORE_MODULE\CACHE_MANAGER.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\REMUXER\CORE_MODULE\REGISTRY_MANAGER.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SOURCE\REMUXER\USER_INTERFACE\NO_ARG_SCREEN.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SOURCE\CON_UI\CUI_INPUT.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SOURCE\REMUXER\STDINC.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SOURCE\REMUXER\CORE_MODULE\CORE_PUBLIC.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SOURCE\CON_UI\CUI_PUBLIC.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SOURCE\CON_UI\CUI_PRIVATE.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SOURCE\REMUXER\REMUX_MODULE.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SOURCE\REMUXER\COMMAND_MODULE\COM_PUBLIC.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SOURCE\REMUXER\COMMAND_MODULE\COM_PRIVATE.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SOURCE\REMUXER\CORE_MODULE\CORE_PRIVATE.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SOURCE\REMUXER\DRAW_MODULE\DRAW_PUBLIC.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SOURCE\REMUXER\STRUCTS.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SOURCE\REMUXER\DRAW_MODULE\UI_BUILDER.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+</Project>
