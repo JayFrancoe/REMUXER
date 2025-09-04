@@ -2,8 +2,8 @@
 #include "REMUXER/STDINC.H"
 #include "CUI_PUBLIC.H"
 
+/*
 typedef enum input_rules_e input_rules;
-
 
 enum input_rules_e {
     NONE,
@@ -26,10 +26,9 @@ typedef short int input_e;
 
 bool breaks_rule(char c, enum input_rules Rule);
 
-int cui_read(con_ui *,
-             char *Buffer, size_t MaxLength, 
-             input_rules Rule);
-
 int cui_read_ex(con_ui *,
                 char *Buffer, size_t maxLength,
                 input_rules Rule, char TerminationChar);
+*/
+
+int cui_read(con_ui *, char *buffer, size_t max_length);

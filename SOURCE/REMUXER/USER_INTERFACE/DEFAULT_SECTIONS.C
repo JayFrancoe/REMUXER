@@ -40,17 +40,17 @@ void read_command(remux_module *remux)
     {
         char command_buffer[80] = { 0 };
 
-        cui_read(cui, command_buffer, 80, NONE);
+        cui_read(cui, command_buffer, 80);
 
         com_parse(remux, command_buffer);
 
-        if ('\0' == *remux->com.status_message) {
-            return;
+        char *status_message = get_status_message(&remux->com);
+
+        if (status_message) {
+            cui_draw(cui, status_message);
+        
+            (void)_getch();
         }
-
-        cui_draw(cui, remux->com.status_message);
-
-        (void) _getch();
 
         return;
     }

@@ -40,7 +40,7 @@ struct core_module_s
 
 void get_output_file(core_module *, char *Buffer, size_t MaxSize);
 
-void core_init(core_module *, int argc, char **argv);
+void core_init(core_module *, char *module, char *input_file);
 
 void launch_mpv_preview(core_module *);
 void launch_ffmpeg(core_module *);

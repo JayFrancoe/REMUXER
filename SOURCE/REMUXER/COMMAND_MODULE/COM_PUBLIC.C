@@ -13,6 +13,14 @@ void com_init(command_module *com)
    return;
 }
 
+char *get_status_message(command_module *com)
+{
+    if ('\0' == *com->status_message) {
+        return NULL;
+    }
+
+    return com->status_message;
+}
 
 void set_status_message(command_module *com, const char *str)
 {
@@ -25,7 +33,7 @@ void reset_status_message(command_module *com)
     memset(com->status_message, '\0', 100);
 }
 
-void com_parse(struct remux_module_s *remux, const char *command)
+void com_parse(remux_module *remux, const char *command)
 {
     reset_status_message(&remux->com);
 

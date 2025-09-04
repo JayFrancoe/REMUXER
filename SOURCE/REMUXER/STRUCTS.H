@@ -12,7 +12,7 @@ typedef struct core_options_s core_options;
 typedef struct core_module_s  core_module;
 typedef struct core_externals_s core_externals;
 
-// COMMMANd
+// COMMMAND
 typedef struct command_module_s command_module;
 typedef void( *command_fn )( remux_module *,
                              const char * );

@@ -41,7 +41,7 @@ int  cui_newline(con_ui *);
 
 int cui_newline_ex(con_ui *, 
                    short int indent, 
-                   short int NumNewlines);
+                   short int num_newlines);
 
 void cui_refresh(con_ui *);
 void cui_clear_screen(con_ui *);

@@ -52,32 +52,32 @@ void get_path_info(path_t *path, const char *input)
     path->file_directory[last_slash] = '\0';
 }
 
-void get_output_file(core_module *core, char *Buffer, size_t MaxSize)
+void get_output_file(core_module *core, char *buffer, size_t max_size)
 {
     const path_t *input = &core->input_file;
     const core_options *option = &core->options;
 
-    memset(Buffer, 0, MaxSize);
+    memset(buffer, 0, max_size);
 
-    strcat(Buffer, input->file_directory);
-    strcat(Buffer, "/");
+    strcat(buffer, input->file_directory);
+    strcat(buffer, "/");
     
     if (*option->project) {
-        strcat(Buffer, option->project);
-        strcat(Buffer, "/");
+        strcat(buffer, option->project);
+        strcat(buffer, "/");
     }
     
     if (*option->file_name) {
-        strcat(Buffer, option->file_name);
+        strcat(buffer, option->file_name);
     } else {
-        strcat(Buffer, input->file_name);
+        strcat(buffer, input->file_name);
     }
 
-    strcat(Buffer, ".");
+    strcat(buffer, ".");
     if (*option->extension) {
-        strcat(Buffer, option->extension);
+        strcat(buffer, option->extension);
     } else {
-        strcat(Buffer, input->file_extension);
+        strcat(buffer, input->file_extension);
     }
 }
 
@@ -90,12 +90,12 @@ void get_install_dir(char *destination, char *exe_file)
     memcpy(destination, exe_path.file_directory, MAX_PATH);
 }
 
-void core_init(core_module *core, int argc, char **argv)
+void core_init(core_module *core, char *module, char *input_file)
 {
-    get_install_dir(&core->install_directory, argv[0]);
+    get_install_dir(&core->install_directory, module);
 
-    if (argc > 1) {
-        get_path_info(&core->input_file, argv[1]);
+    if (NULL != input_file) {
+        get_path_info(&core->input_file, input_file);
     }
 
     init_externals(core);

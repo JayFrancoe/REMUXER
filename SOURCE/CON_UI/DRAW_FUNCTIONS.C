@@ -40,8 +40,8 @@ void cui_draw(con_ui *cui, const char *string)
 }
 
 void cui_draw_ex(con_ui *cui, 
-                       int offset, text_alignment alignment,
-                       const char *text)
+                 int offset, text_alignment alignment,
+                 const char *text)
 {
     if (alignment == left)
     {
@@ -70,7 +70,9 @@ void cui_draw_ex(con_ui *cui,
     return;
 }
 
-void cui_draw_ex_f(con_ui *cui, int offset, text_alignment alignment, const char *text, ...)
+void cui_draw_ex_f(con_ui *cui, 
+                   int offset, text_alignment alignment, 
+                   const char *text, ...)
 {
     read_var_args(buffer, 800, text);
 
@@ -82,12 +84,13 @@ int cui_newline(con_ui *cui)
     return cui_newline_ex(cui, 0, 1);
 }
 
-int cui_newline_ex(con_ui *cui, short int indent, short int NumNewlines)
+int cui_newline_ex(con_ui *cui, 
+                   short int indent, short int num_newlines)
 {
     cui->cur_x = 0;
 
     cui->cur_x += indent;
-    cui->cur_y += NumNewlines;
+    cui->cur_y += num_newlines;
 
     cui_refresh_cursor_internal(cui);
 
@@ -113,7 +116,9 @@ void cui_clear_char(con_ui *cui)
     cui_dec_x(cui);
 }
 
-static struct {
+/* store last info to avoid division math */
+static 
+struct {
     short int cached_width;
     short int width;
     short int div;

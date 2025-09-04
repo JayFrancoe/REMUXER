@@ -1,4 +1,5 @@
 #pragma once
+#include "REMUXER/STRUCTS.H"
 
 #define MAX_COMMANDS 32
 
@@ -25,13 +26,12 @@ struct command_module_s
     char status_message[100];
 };
 
-void set_status_message(command_module *com, 
-                        const char *str);
+void set_status_message(command_module *, const char *str);
 
-void reset_status_message(command_module *com);
+void reset_status_message(command_module *);
 
+char *get_status_message(command_module *);
 
-void com_init(command_module *com);
+void com_init(command_module *);
 
-void com_parse(struct remux_module_s *remux, 
-               const char *comamnd);
+void com_parse(remux_module *remux, const char *command);

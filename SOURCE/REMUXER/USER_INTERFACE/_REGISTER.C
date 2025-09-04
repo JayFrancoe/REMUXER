@@ -27,5 +27,8 @@ void set_screen(draw_module *draw, screen_e screen)
 
 void init_screens(draw_module *draw)
 {
+    if (draw->active_screen != NULL) {
+        return;
+    }
     draw->active_screen = &main_screen;
 }

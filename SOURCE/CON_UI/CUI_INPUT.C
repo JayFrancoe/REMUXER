@@ -4,11 +4,9 @@
 #include "CUI_INPUT.H"
 
 
-int cui_read(con_ui *cui,
-             char *Buffer, size_t MaxLength,
-             input_rules Rule)
+int cui_read(con_ui *cui, char *buffer, size_t max_length)
 {
-    gets_s(Buffer, MaxLength);
+    gets_s(buffer, max_length);
 
     //return cui_read_ex(cui, Buffer, MaxLength, Rule, 0xFF);
 }
