@@ -16,7 +16,7 @@ to quickly preview the output path.
 
 ## Features
 the `setproject` and `setname` commands will let you organize your footage quickly. `setproject` automatically creates a new folder in your input
-files directory and places the output file in that folder. Projects have persistance so you can do a bunch of footage in batches. 
+files directory and places the output file in that folder. Projects have persistence so you can do a bunch of footage in batches. 
 
 There are certain commands such as `setseektime`, `setduration`, `setbitrate` and `mute` which lets you perform basic edits to your media file.
 These are previewable through MPV using the command `play` which launches mpv.exe with the provided options.
@@ -74,7 +74,7 @@ The cui struct mainly holds information for where the cursor is, how large the c
 Certain functions have _ex which grants you extra control. 
 Draw functions have a _f extensions that let you draw them in a printf.
 
-## The Remux Mododule
+## The Remux Module
 The remux module binds all the components together into one instanced struct. The instance lives in the main function, and is passed down to most functions.
 
 ## CORE MODULE
@@ -98,7 +98,7 @@ This module is home to the code for every command. I use the create_com macro to
 You can disregard the public functions unless you want to write a different footer than the default one.
 
 create_com takes in the command name (which creates a {name}\_fn function prototype, and com\_{name} command_t struct), A short description for the help page,
-and finally the body for the command funtion. You get two arguments. A pointer to the remux module, and a char * to the next arg. You can think of this like argv.
+and finally the body for the command function. You get two arguments. A pointer to the remux module, and a char * to the next arg. You can think of this like argv.
 
 ex code:
 ```c
@@ -147,7 +147,7 @@ You can create your own header body and footer through the `section_t` struct. T
 `.draw_fn` which takes in a function pointer of `void(remux_module *, section_t *)` where section_t is itself.
 `.origin_y` lets you specify where on the screen to print. Positive numbers go from the top and down, while negative numbers go from the bottom and up. 
 You can also use `ORIGIN_CONTINUATION` (0x7FFF) to set the origin to wherever the cursor is after the previous section. 
-Any number larger than `cui->max_y` will trigger this behaviour.
+Any number larger than `cui->max_y` will trigger this behavior.
 
 Inside your draw_fn you can use the `get_cui` macro to get a pointer to the con_ui instance. 
 Using the `get_section_origin()` function you can parse the origin_y to get a normalized y coordinate. Pass this into `cui_set_cursor` to set the cursor to the origin point.
