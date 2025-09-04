@@ -7,7 +7,7 @@ if you are a developer, make sure to read the For Developers section.
 Remuxing is the process of taking a media file and running it through ffmpeg to let it 
 automatically adjust bitrate and settings to decrease the filesize. 
 
-Simply putting a file through ffmpeg can remove up to 50% of the filesize.
+Simply running a file through ffmpeg can remove up to 50% of the filesize.
 
 ## Why remuxer?
 Remuxer lets you quickly change certain aspects of the footage in easy to remember commands. 
@@ -16,7 +16,7 @@ to quickly preview the output path.
 
 ## Features
 the `setproject` and `setname` commands will let you organize your footage quickly. `setproject` automatically creates a new folder in your input
-files directory and places the output file in that folder. Projects have persistance so you can do a bunch of footage in batches. 
+files directory and places the output file in that folder. Projects have persistence so you can do a bunch of footage in batches. 
 
 There are certain commands such as `setseektime`, `setduration`, `setbitrate` and `mute` which lets you perform basic edits to your media file.
 These are previewable through MPV using the command `play` which launches mpv.exe with the provided options.
@@ -43,45 +43,62 @@ First of all lets talk about how to open and build it.
 - Windows
 - MSVC or Visual Studio
 
-The code does not support linux as I do not know or use linux. If you do, feel free to write a pull request with support, tho undoubtedly there is probably already something like 
-avalible in a packagemanger.
+The code does not support linux as I do not know or use linux. If you do, feel free to write a pull request with support.
 
 ## Style guide:
 - Filenames should always be `UPPERCASE` and never use backward slash for `#includes`
-- All names should use `snake_case`. 
-- Lines should never exceed `80 chars`
+- All names in the code should use `snake_case` styling. 
+- Lines should never exceed `80 chars`.
 - Pointers align to the `right`.
-- Raw structs should have suffix `\_s`.
-- Structs that get used outside of other structs should be typedefed with suffix `\_t`.
-- Function pointers should have suffix `\_fn`.
-- `Single line if statements` should have the `opening bracket on the same line`.
+- file structure goes `constants`, `macros`, `typedefs`, `structs` and `function prototypes`.
+- Raw structs should have suffix `_s`.
+- Enums should have suffix `_e`.
+- Structs that get used outside of other structs should be typedefed with suffix `_t`.
+- Function pointers should have suffix `_fn`.
+- Single line if statements should have the opening bracket on the same line.
 - `Const` and `static` modifier appear on row before return type.
 - 16bit integers should be typed `short int`.
 - `#define` macros should use `snake_case`, substitute should use `UPPERCASE`.
-
+- struct pointers and parameters that don't require context should be left unnamed in their prototypes.
 
 # Understanding the source tree
-The source tree is made up of the console manipulation library I wrote, and the Remux module. The remux module has three key components that manage everything.
+You'll find two primary folders. CON_UI and REMUXER. CON_UI can be viewed as external to the program and should never include anything from REMUXER.
+
+Each folder and component should have a public and private header file. The files should be namespaced with the component name with the suffix `_PUBLIC.H` or `_PRIVATE.H`. 
 
 ## CON UI
-The CON_UI library is a way to manipulate the console for drawing text. Each con_ui function is prefixed with `cui_` and it does not depend on any remuxer code.
+The CON_UI library is a way to manipulate the console for drawing text. Each con_ui function is prefixed with `cui_`.
+
+The cui struct mainly holds information for where the cursor is, how large the console screen buffer is and some info for.
+
+Certain functions have _ex which grants you extra control. 
+Draw functions have a _f extensions that let you draw them in a printf.
+
+## The Remux Module
+The remux module binds all the components together into one instanced struct. The instance lives in the main function, and is passed down to most functions.
 
 ## CORE MODULE
-The core module has the info for each option, path information for externals and info for the path for argv[1] and install directory.
-The core module also houses the code for launching MPV and FFMPEG and the cache manager.
+The core module struct stores information for most things you see on the screen. All the options, and some behind the scenes things like the external exe paths and the cache.
 
-### Cache info
----
-The commmands `setproject` and `setextension` will automatically create a core_cache file. This will store your 
-project name and extension for you to easier edit multple files. 
+It also has some public helper functions that let you launch externals and control the cache.
 
-Use the commmand `clearcache` to remove this file and clear all cached settings.
+```cs
+void get_output_file(core_module *, char *buffer, size_t max_size);
+
+void launch_mpv_preview(core_module *);
+void launch_ffmpeg(core_module *);
+
+void cache_core(core_module *);
+void clear_cache(core_module *);
+```
 
 ## COMMAND MODULE
 This module is home to the code for every command. I use the create_com macro to dynamically set up all the information as well as code for the commands.
 
+You can disregard the public functions unless you want to write a different footer than the default one.
+
 create_com takes in the command name (which creates a {name}\_fn function prototype, and com\_{name} command_t struct), A short description for the help page,
-and finally the body for the command funtion. You get two arguments. A pointer to the remux module, and a char * to the next arg. You can think of this like argv.
+and finally the body for the command function. You get two arguments. A pointer to the remux module, and a char * to the next arg. You can think of this like argv.
 
 ex code:
 ```c
@@ -104,7 +121,6 @@ command_t com_setname = { .word = "setname", .description = "Sets the filename o
 ```
 You can register this command at the bottom using `register_com()` and &com_ (your command name)
 
-
 You also get access to a set_status_message() function to display messages before the screen is updated.
 
 ## DRAW MODULE
@@ -112,11 +128,11 @@ The draw module is made up in 2 parts. The `DRAW_MODULE/` directory and the `USE
 
 For adding new interfaces, You can largely ignore the draw_module directory with the exception of the screen_e enum which lets you add a screen.
 
+- set_screen() lets you select the screen to draw in the next iteration of the draw loop. uses the screen_e enum.
+  
 - draw_interface()
 This should only be called from main and creates a loop which clears the screen and draws each section from the active_screen pointer.
 Raise the exit_signal in order to exit out of loop.
-
-- set_screen() lets you select the screen to draw in the next iteration of the loop. uses the screen_e enum.
 
 ## User Interface Code
 
@@ -131,7 +147,7 @@ You can create your own header body and footer through the `section_t` struct. T
 `.draw_fn` which takes in a function pointer of `void(remux_module *, section_t *)` where section_t is itself.
 `.origin_y` lets you specify where on the screen to print. Positive numbers go from the top and down, while negative numbers go from the bottom and up. 
 You can also use `ORIGIN_CONTINUATION` (0x7FFF) to set the origin to wherever the cursor is after the previous section. 
-Any number larger than `cui->max_y` will trigger this behaviour.
+Any number larger than `cui->max_y` will trigger this behavior.
 
 Inside your draw_fn you can use the `get_cui` macro to get a pointer to the con_ui instance. 
 Using the `get_section_origin()` function you can parse the origin_y to get a normalized y coordinate. Pass this into `cui_set_cursor` to set the cursor to the origin point.
