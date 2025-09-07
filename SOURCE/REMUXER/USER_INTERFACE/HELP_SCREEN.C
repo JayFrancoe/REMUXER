@@ -23,8 +23,7 @@ void help_body_interface(remux_module *remux, section_t *section)
     cui_set_y(cui, origin_y);
 
     cui_draw_ex(cui, 0, center, "COMMAND LIST:");
-    cui_newline(cui);
-    cui_newline(cui);
+    cui_newline_ex(cui, 0, 2);
 
     for (int i = 0; i < remux->com.com_count; i++)
     {
@@ -33,8 +32,7 @@ void help_body_interface(remux_module *remux, section_t *section)
         char word_buffer[21] = {0};
         get_com_name(word_buffer, com->word, 20, '.');
 
-        cui_draw_ex_f(cui, 4, left, "%s: %s",
-            word_buffer, com->description);
+        cui_draw_ex_f(cui, 4, left, "%s: %s", word_buffer, com->description);
         cui_newline(cui);
     }
 
@@ -53,8 +51,8 @@ section_t help_body = {
 };
 
 screen_t help_screen = {
-    .name = "Help",
+    .name   = "Help",
     .header = &default_header,
-    .body = &help_body,
+    .body   = &help_body,
     .footer = &default_footer
 };

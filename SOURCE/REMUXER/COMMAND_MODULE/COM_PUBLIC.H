@@ -30,8 +30,8 @@ void set_status_message(command_module *, const char *str);
 
 void reset_status_message(command_module *);
 
-char *get_status_message(command_module *);
+const char *get_status_message(command_module *);
 
-void com_init(command_module *);
+void comm_init(command_module *);
 
-void com_parse(remux_module *remux, const char *command);
+void com_parse(remux_module *, const char *command);

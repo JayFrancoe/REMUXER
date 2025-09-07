@@ -6,14 +6,14 @@
 #include "COM_PUBLIC.H"
 
 
-void com_init(command_module *com)
+void comm_init(command_module *com)
 {
    register_commands(com);
 
    return;
 }
 
-char *get_status_message(command_module *com)
+const char *get_status_message(command_module *com)
 {
     if ('\0' == *com->status_message) {
         return NULL;

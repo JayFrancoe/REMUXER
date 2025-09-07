@@ -10,11 +10,10 @@ void no_arg_body_interface(remux_module *remux, section_t *section)
 
     cui_set_cursor(cui, half, 0);
 
-    cui_draw_ex(cui, 0, center, 
-        "No input argument given");
+    cui_draw_ex(cui, 0, center, "No input argument given");
     cui_newline(cui);
 
-    cui_draw_ex(cui, 0, center,
+    cui_draw_ex(cui, 0, center, 
         "Drag media file onto the executable to use program");
 
     section->height = get_section_height(cui, half);

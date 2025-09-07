@@ -3,39 +3,24 @@
 #include "DRAW_PUBLIC.H"
 
 
-void draw_section(remux_module *remux, section_t *section)
-{
+void draw_section(remux_module *remux, section_t *section) {
     section->draw_fn(remux, section);
 }
 
-void clear_section(remux_module *remux, section_t *section)
-{
-    con_ui *cui = &remux->ui.cui;
+// not implemented
+void clear_section(remux_module *remux, section_t *section) {}
 
-    cui_store_cursor(cui);
-
-
-}
-
+/* input is handled by interface footer functions */
 void draw_interface(remux_module *remux)
 {
-    draw_module *draw = &remux->ui;
     con_ui *cui = &remux->ui;
+    screen_t *screen = remux->ui.active_screen;
 
-    while (1) 
-    {
-        cui_clear_screen(cui);
-        
-        screen_t *screen = draw->active_screen;
+    cui_clear_screen(cui);
 
-        draw_section(remux, screen->header);
-        draw_section(remux, screen->body);
-        draw_section(remux, screen->footer);
-
-        if (remux->exit_signal) {
-            break;
-        }
-    }
+    draw_section(remux, screen->header);
+    draw_section(remux, screen->body);
+    draw_section(remux, screen->footer);
 }
 
 void draw_init(draw_module *draw_fn)

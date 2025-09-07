@@ -4,17 +4,17 @@ remux_module remux;
 
 int main(int argc, char **argv)
 {
-    char *input_file = NULL;
+    char *input_file = (argc > 1) ? argv[1] : NULL;
 
-    if (argc > 1) {
-        input_file = argv[1];
-    } else {
+    core_init(&remux.core, argv[0], input_file);
+    comm_init(&remux.com);
+    draw_init(&remux.ui);
+    
+    if (input_file == NULL) {
         set_screen(&remux.ui, SCREEN_NO_ARGS);
     }
 
-    core_init(&remux.core, argv[0], input_file);
-    com_init(&remux.com);
-    draw_init(&remux.ui);
-    
-    draw_interface(&remux);
+    while (!remux.exit_signal) {
+        draw_interface(&remux); 
+    }
 }

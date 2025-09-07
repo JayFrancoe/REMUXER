@@ -44,9 +44,10 @@ void read_command(remux_module *remux)
 
         com_parse(remux, command_buffer);
 
-        char *status_message = get_status_message(&remux->com);
+        const char *status_message = get_status_message(&remux->com);
 
-        if (status_message) {
+        if (status_message) 
+        {
             cui_draw(cui, status_message);
         
             (void)_getch();
