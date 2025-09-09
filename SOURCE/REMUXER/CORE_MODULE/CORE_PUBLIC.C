@@ -2,6 +2,7 @@
 #include "CORE_PRIVATE.H"
 #include "CORE_PUBLIC.H"
 
+static /* normalize path, extract directory, name and extension */
 void get_path_info(path_t *path, const char *input)
 {
     size_t i = 0, 
@@ -41,7 +42,7 @@ void get_path_info(path_t *path, const char *input)
             last_slash = i;
         }
 
-        if (input[i] == '.') {
+        if (c == '.') {
             k = 0;
         }
     }
@@ -90,9 +91,9 @@ void get_install_dir(char *destination, char *exe_file)
     memcpy(destination, exe_path.file_directory, MAX_PATH);
 }
 
-void core_init(core_module *core, char *module, char *input_file)
+void core_init(core_module *core, char *exe_file, char *input_file)
 {
-    get_install_dir(&core->install_directory, module);
+    get_install_dir(&core->install_directory, exe_file);
 
     if (NULL != input_file) {
         get_path_info(&core->input_file, input_file);

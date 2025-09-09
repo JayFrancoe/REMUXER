@@ -4,4 +4,4 @@ FFMPEG:
 https://github.com/BtbN/FFmpeg-Builds/releases
 
 MPV:
-https://github.com/zhongfly/mpv-winbuild/releases
+https://nightly.link/mpv-player/mpv/workflows/build/master

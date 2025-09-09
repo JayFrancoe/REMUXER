@@ -38,9 +38,9 @@ struct core_module_s
     bool debug;
 };
 
-void get_output_file(core_module *, char *Buffer, size_t MaxSize);
+void get_output_file(core_module *, char *buffer, size_t max_size);
 
-void core_init(core_module *, char *module, char *input_file);
+void core_init(core_module *, char *exe_file, char *input_file);
 
 void launch_mpv_preview(core_module *);
 void launch_ffmpeg(core_module *);
